@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, render_template
+from flask import Flask, request, make_response, render_template, redirect, url_for
 
 app = Flask(__name__, template_folder="templates")
 
@@ -12,6 +12,10 @@ def index():
 def other():
     some_text = "Hello, World"
     return render_template('index.html', some_text = some_text);
+
+@app.route('/redirect_endpoint')
+def redirect_endpoint():
+    return redirect(url_for('other'))
 
 @app.template_filter('revers_string')
 def revers_string(s):
